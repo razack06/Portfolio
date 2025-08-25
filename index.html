@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdul Razack | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/9257bfa718.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="logo">Abdul<span>Razack</span></div>
+    <ul id="sidemenu">
+      <li><a href="#header">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <i class="fa-solid fa-circle-xmark" onclick="closemenu()"></i>
+    </ul>
+    <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="header">
+    <div class="hero">
+      <h1>Hello, I'm <span>Abdul Razack</span></h1>
+      <p>A passionate Software Developer from Chennai</p>
+      <div class="hero-buttons">
+        <a href="#portfolio" class="btn">View Work</a>
+        <a href="#contact" class="btn btn2">Hire Me</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="glass">
+    <div class="container about-container">
+      <div class="about-img">
+        <img src="images/user.png" alt="Abdul Razack">
+      </div>
+      <div class="about-text">
+        <h2>About Me</h2>
+        <p>
+          I’m a software developer skilled in building responsive web
+          applications using JavaScript, React, and modern design principles.
+          I love transforming ideas into reality with clean code and elegant
+          designs.
+        </p>
+        <div class="tabs">
+          <button class="tab active" onclick="openTab(event,'skills')">Skills</button>
+          <button class="tab" onclick="openTab(event,'experience')">Experience</button>
+          <button class="tab" onclick="openTab(event,'education')">Education</button>
+        </div>
+
+        <div class="tab-content active" id="skills">
+          <ul>
+            <li><strong>Frontend:</strong> JavaScript, HTML, CSS, React.js, Bootstrap</li>
+            <li><strong>Backend:</strong> Java, Python, SQL, Spring Boot</li>
+            <li><strong>UI/UX:</strong> Figma</li>
+          </ul>
+        </div>
+        <div class="tab-content" id="experience">
+          <ul>
+            <li>2021 - Built Web Apps</li>
+            <li>2022 - Frontend Developer Intern</li>
+            <li>2023 - React & UI/UX Projects</li>
+          </ul>
+        </div>
+        <div class="tab-content" id="education">
+          <ul>
+            <li>B.Tech in ECE - 2025</li>
+            <li>IBM Cloud Internship - 2024</li>
+            <li>Aadhyaa Skills- 2023</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <div class="container">
+      <h2>My Work</h2>
+      <div class="card-grid">
+        <div class="work glass">
+          <img src="images/work-1.png" alt="">
+          <div class="overlay">
+            <h3>Social Media App</h3>
+            <p>Responsive social media app design.</p>
+          </div>
+        </div>
+        <div class="work glass">
+          <img src="images/work-2.png" alt="">
+          <div class="overlay">
+            <h3>E-commerce Platform</h3>
+            <p>Interactive shopping platform with React.</p>
+          </div>
+        </div>
+        <div class="work glass">
+          <img src="images/work-3.png" alt="">
+          <div class="overlay">
+            <h3>Portfolio Website</h3>
+            <p>Personal portfolio built with HTML, CSS & JS.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="glass">
+    <div class="container contact-container">
+      <div class="contact-info">
+        <h2>Contact Me</h2>
+        <p><i class="fa-solid fa-envelope"></i> abdulrazack0006@gmail.com</p>
+        <p><i class="fa-solid fa-phone"></i> +91 6379608383</p>
+        <div class="socials">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/contactabdulrazack/"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://github.com/razack06"><i class="fa-brands fa-github"></i></a>
+        </div>
+        <a href="images/Abdul_Razack_Software_Developer.pdf" download class="btn">Download CV</a>
+      </div>
+      <form name="submit-to-google-sheet" class="contact-form">
+        <input type="text" name="Name" placeholder="Your Name" required>
+        <input type="email" name="Email" placeholder="Your Email" required>
+        <textarea name="Message" rows="5" placeholder="Your Message"></textarea>
+        <button type="submit" class="btn btn2">Send Message</button>
+        <span id="msg"></span>
+      </form>
+    </div>
+  </section>
+
+  <!-- JS -->
+  <script>
+    // Tabs
+    function openTab(evt, tabName) {
+      let tabs = document.querySelectorAll('.tab-content');
+      let btns = document.querySelectorAll('.tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      btns.forEach(b => b.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+
+    // Mobile Menu
+    let sidemenu=document.getElementById("sidemenu");
+    function openmenu(){ sidemenu.style.right="0"; }
+    function closemenu(){ sidemenu.style.right="-200px"; }
+
+    // Google Sheet Form
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzbWffQZmB0f2p-WyHbB9lIWiAvlEDBGJMcVk8ocekH7NupEEtPexTaGt_43lwq9xeJEA/exec';
+    const form = document.forms['submit-to-google-sheet'];
+    const msg = document.getElementById("msg");
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(() => {
+        msg.innerHTML = "Message sent successfully!";
+        setTimeout(()=> msg.innerHTML="", 4000);
+        form.reset();
+      })
+      .catch(error => console.error('Error!', error.message));
+    });
+
+    // Navbar scroll effect
+    window.addEventListener("scroll", function(){
+      const navbar = document.getElementById("navbar");
+      if(window.scrollY > 50){
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+  </script>
+
+</body>
+</html>

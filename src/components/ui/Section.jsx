@@ -3,7 +3,7 @@ import Reveal from './Reveal.jsx'
 /** Section heading: eyebrow label + bold title with blue underline accent */
 export function SectionHead({ id, eyebrow, title, aside }) {
   return (
-    <Reveal className="relative mb-10 text-center">
+    <Reveal className="relative mb-12 text-center">
       <p className="eyebrow">{eyebrow}</p>
       <h2
         id={`${id}-heading`}
@@ -13,7 +13,7 @@ export function SectionHead({ id, eyebrow, title, aside }) {
         {/* Blue underline accent */}
         <span
           aria-hidden="true"
-          className="absolute -bottom-2 left-1/2 h-0.5 w-24 -translate-x-1/2 rounded-full bg-gradient-to-r from-transparent via-blue-500 to-transparent"
+          className="absolute -bottom-2.5 left-1/2 h-0.5 w-24 -translate-x-1/2 rounded-full bg-gradient-to-r from-transparent via-blue-500 to-transparent"
         />
       </h2>
       {aside && <div className="mt-4 sm:absolute sm:bottom-1 sm:right-0 sm:mt-0">{aside}</div>}
@@ -21,11 +21,11 @@ export function SectionHead({ id, eyebrow, title, aside }) {
   )
 }
 
-/** Section wrapper with generous horizontal margins/padding */
+/** Section wrapper with centered max-width and generous side spaces */
 export default function Section({ id, children, className = '' }) {
   return (
-    <section id={id} aria-labelledby={`${id}-heading`} className={`panel py-14 sm:py-20 ${className}`}>
-      <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">{children}</div>
+    <section id={id} aria-labelledby={`${id}-heading`} className={`panel py-16 sm:py-24 ${className}`}>
+      <div className="mx-auto max-w-5xl px-6 sm:px-8 md:px-12">{children}</div>
     </section>
   )
 }

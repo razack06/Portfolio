@@ -10,9 +10,8 @@
  */
 
 export const site = {
-  // TODO: Your deployed URL, no trailing slash, e.g. "https://razack06.github.io/Portfolio"
-  // Used for Open Graph / canonical tags. Leave "" until you deploy.
-  url: '',
+  // Your deployed URL, no trailing slash
+  url: 'https://razack06.github.io/Portfolio',
   title: 'Abdul Razack P R · Java Backend Developer',
   description:
     'Java Backend Developer in Chennai with 1+ year of experience in Spring Boot, REST APIs, PostgreSQL, WebSocket real-time dashboards and GPS/IoT device integration.',
@@ -64,8 +63,7 @@ export const contact = {
   phone: '+91 6379608383',
   linkedin: 'https://www.linkedin.com/in/contactabdulrazack',
   linkedinLabel: 'linkedin.com/in/contactabdulrazack',
-  // TODO: Your GitHub profile URL, e.g. "https://github.com/your-username". "" hides it.
-  github: '',
+  github: 'https://github.com/razack06',
 }
 
 // About section: stat list on the right (icon = name in components/ui/Icon.jsx, tone = card colour)

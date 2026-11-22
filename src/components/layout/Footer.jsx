@@ -27,7 +27,7 @@ export default function Footer() {
         <div className="flex flex-col gap-2 md:items-end">
           <Socials />
           <p className="font-mono text-xs text-muted" suppressHydrationWarning>
-            © {new Date().getFullYear()} {profile.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {profile.name}. All rights reserved.
           </p>
         </div>
       </div>

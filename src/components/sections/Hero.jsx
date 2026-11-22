@@ -5,7 +5,7 @@ import Socials from '../ui/Socials.jsx'
 
 const resumeHref = `${import.meta.env.BASE_URL}${profile.resumeFile}`
 const rise = (delay) => ({
-  initial: { opacity: 0, y: 14 },
+  initial: { opacity: 1, y: 0 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay },
 })
@@ -99,7 +99,7 @@ export default function Hero() {
 
           <h1 className="mt-5 text-5xl font-bold leading-[1.02] tracking-tight text-ink sm:text-6xl lg:text-[4.2rem]">
             {profile.name.split(' ')[0]}{' '}
-            <span className="relative inline-block text-gradient-blue">
+            <span className="text-blue-400">
               {profile.name.split(' ').slice(1).join(' ')}
             </span>
           </h1>

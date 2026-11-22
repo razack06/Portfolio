@@ -21,11 +21,11 @@ export function SectionHead({ id, eyebrow, title, aside }) {
   )
 }
 
-/** Section wrapper with centered max-width and generous side spaces */
+/** Full-page section wrapper with max-w-7xl and comfortable side margins */
 export default function Section({ id, children, className = '' }) {
   return (
     <section id={id} aria-labelledby={`${id}-heading`} className={`panel py-16 sm:py-24 ${className}`}>
-      <div className="mx-auto max-w-5xl px-6 sm:px-8 md:px-12">{children}</div>
+      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-12">{children}</div>
     </section>
   )
 }

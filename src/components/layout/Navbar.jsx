@@ -17,7 +17,7 @@ export function Logo({ className = '' }) {
   )
 }
 
-/** Sticky navbar with centered container and generous side margins */
+/** Sticky navbar on full-page width (max-w-7xl) */
 export default function Navbar() {
   const active = useActiveSection(ids) || 'top'
   const [open, setOpen] = useState(false)
@@ -45,7 +45,7 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <nav aria-label="Primary" className="mx-auto flex h-18 max-w-5xl items-center justify-between px-6 sm:px-8 md:px-12">
+      <nav aria-label="Primary" className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6 sm:px-10 lg:px-12">
         <a href="#top" aria-label={`${profile.name}, home`}>
           <Logo />
         </a>

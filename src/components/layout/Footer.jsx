@@ -2,13 +2,13 @@ import { profile, nav, headings } from '../../data/profile.js'
 import Socials from '../ui/Socials.jsx'
 import { Logo } from './Navbar.jsx'
 
-/** Centered dark footer with blueprint grid */
+/** Dark footer on full-page width (max-w-7xl) */
 export default function Footer() {
   return (
     <footer className="relative bg-[#060c1a] overflow-hidden">
       {/* Blueprint grid background */}
       <div className="blueprint-grid absolute inset-0 opacity-50" aria-hidden="true" />
-      <div className="relative mx-auto grid max-w-5xl items-center gap-6 border-t border-[#1e2d4a] px-6 py-10 sm:px-8 md:grid-cols-[1fr_auto_1fr] md:px-12">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-6 border-t border-[#1e2d4a] px-6 py-10 sm:px-10 md:grid-cols-[1fr_auto_1fr] lg:px-12">
         <div>
           <Logo />
           <p className="mt-1 font-mono text-sm text-ink-2">{headings.footerTagline}</p>

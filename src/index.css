@@ -12,7 +12,7 @@
   --color-surface: #111827;
   --color-surface-2: #1a2236;
   --color-line: #1e2d4a;
-  --color-ink: #e2e8f0;
+  --color-ink: #f1f5f9;
   --color-ink-2: #94a3b8;
   --color-muted: #64748b;
   --color-navy: #3b82f6;
@@ -53,7 +53,7 @@
   body {
     @apply bg-bg text-ink font-sans antialiased;
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59,130,246,0.15), transparent),
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59,130,246,0.18), transparent),
       linear-gradient(to bottom, #0a0f1e, #0a0f1e);
   }
   section[id] {
@@ -65,15 +65,15 @@
     border-radius: 8px;
   }
   ::selection {
-    background: rgba(59, 130, 246, 0.3);
-    color: #e2e8f0;
+    background: rgba(59, 130, 246, 0.35);
+    color: #f1f5f9;
   }
 }
 
 @layer components {
   /* Section eyebrow pill */
   .eyebrow-pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-400;
+    @apply inline-flex items-center gap-2 rounded-full border border-blue-500/40 bg-blue-500/10 px-3.5 py-1 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-400 shadow-sm shadow-blue-500/10 backdrop-blur-sm;
   }
   /* Uppercase label */
   .eyebrow {
@@ -82,17 +82,17 @@
   .card {
     @apply rounded-2xl border border-[#1e2d4a] bg-[#111827];
   }
-  /* Primary blue button */
+  /* Gradient primary button */
   .btn-dark {
-    @apply inline-flex items-center justify-center gap-2.5 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition duration-200 hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/30 motion-reduce:hover:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-500/35 hover:brightness-110 motion-reduce:hover:translate-y-0;
   }
   /* Secondary ghost button */
   .btn-light {
-    @apply inline-flex items-center justify-center gap-2.5 rounded-full border border-[#1e2d4a] bg-[#111827] px-6 py-3.5 text-sm font-semibold text-ink shadow-md transition duration-200 hover:-translate-y-0.5 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 motion-reduce:hover:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full border border-[#1e2d4a] bg-[#111827]/80 px-6 py-3.5 text-sm font-semibold text-ink shadow-md backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-500/50 hover:bg-blue-500/10 hover:shadow-lg hover:shadow-blue-500/15 motion-reduce:hover:translate-y-0;
   }
   /* Arrow circle on cards */
   .arrow-dot {
-    @apply grid size-9 shrink-0 place-items-center rounded-full border border-[#1e2d4a] bg-[#111827] text-ink-2 transition group-hover:border-blue-500 group-hover:bg-blue-600 group-hover:text-white;
+    @apply grid size-9 shrink-0 place-items-center rounded-full border border-[#1e2d4a] bg-[#111827] text-ink-2 transition-all duration-300 group-hover:border-blue-400 group-hover:bg-gradient-to-tr group-hover:from-blue-600 group-hover:to-cyan-500 group-hover:text-white group-hover:shadow-md group-hover:shadow-blue-500/30;
   }
   /* Section panel */
   .panel {
@@ -113,30 +113,66 @@
 /* Animated blueprint grid background */
 .blueprint-grid {
   background-image:
-    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* Glowing card border on hover */
+/* Glowing card with smooth hover lift and gradient border glow */
 .glow-card {
   position: relative;
-  transition: box-shadow 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .glow-card:hover {
-  box-shadow: 0 0 0 1px rgba(59,130,246,0.4), 0 4px 32px rgba(59,130,246,0.12);
+  transform: translateY(-5px);
+  border-color: rgba(96, 165, 250, 0.5);
+  box-shadow: 0 16px 36px -10px rgba(59, 130, 246, 0.22), 0 0 0 1px rgba(96, 165, 250, 0.3);
 }
 
-/* Badge float */
+/* Streaming Gradient Text with Safe Color Fallback */
+.gradient-title {
+  color: #60a5fa;
+  background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 35%, #a78bfa 70%, #38bdf8 100%);
+  background-size: 250% 250%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 7s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Aurora Background Floating Orbs */
+@keyframes aurora-float-1 {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.16; }
+  50% { transform: scale(1.18) translate(30px, -20px); opacity: 0.26; }
+}
+
+@keyframes aurora-float-2 {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.12; }
+  50% { transform: scale(1.15) translate(-35px, 25px); opacity: 0.22; }
+}
+
+.animate-aurora-1 {
+  animation: aurora-float-1 9s ease-in-out infinite;
+}
+
+.animate-aurora-2 {
+  animation: aurora-float-2 11s ease-in-out -4s infinite;
+}
+
+/* Subtle Badge Bob */
 @media (prefers-reduced-motion: no-preference) {
   .float-a { animation: floaty 6s ease-in-out infinite; }
   .float-b { animation: floaty 7s ease-in-out -3s infinite; }
   .spin-slow { animation: spin 30s linear infinite; }
 }
-@keyframes floaty { 50% { transform: translateY(-8px); } }
+@keyframes floaty { 50% { transform: translateY(-6px); } }
 @keyframes spin   { to   { transform: rotate(360deg); } }
 
-/* Availability pulse */
+/* Radar ping for availability */
 @media (prefers-reduced-motion: no-preference) {
   .pulse-dot::after {
     content: '';
@@ -147,37 +183,23 @@
     animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
 }
-@keyframes ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }
+@keyframes ping { 75%, 100% { transform: scale(2.3); opacity: 0; } }
 
 /* Typing cursor blink */
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 .cursor-blink { animation: blink 1s step-end infinite; }
 
-/* Architecture diagram */
+/* Architecture diagram animated flow */
 .diagram-edge {
   fill: none;
   stroke: #3b82f6;
   stroke-width: 1.5;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 @media (prefers-reduced-motion: no-preference) {
   .diagram-edge.flow {
-    stroke-dasharray: 5 5;
-    animation: flow 1.2s linear infinite;
+    stroke-dasharray: 6 6;
+    animation: flow 1.1s linear infinite;
   }
 }
-@keyframes flow { to { stroke-dashoffset: -20; } }
-
-/* Shimmer on stat numbers */
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position:  200% center; }
-}
-.text-gradient-blue {
-  background: linear-gradient(90deg, #60a5fa, #38bdf8, #60a5fa);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 4s linear infinite;
-}
+@keyframes flow { to { stroke-dashoffset: -24; } }

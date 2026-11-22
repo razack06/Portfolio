@@ -1,0 +1,141 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --font-script: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Warm cream palette */
+  --color-bg: #f7f1e9;
+  --color-panel: #fcf9f4;
+  --color-surface: #ffffff;
+  --color-surface-2: #f4eee6;
+  --color-line: #ece3d7;
+  --color-ink: #121826;
+  --color-ink-2: #374151;
+  --color-muted: #5d6676;
+  --color-navy: #111a2e;
+  --color-orange: #d96a2b;
+  --color-orange-soft: #fbe3d2;
+
+  /* Pastel tones for cards */
+  --color-peach: #fdeee2;
+  --color-peach-2: #fbd9c0;
+  --color-blue: #e6effc;
+  --color-blue-2: #c9dcf7;
+  --color-mint: #e2f1e8;
+  --color-mint-2: #c4e3d1;
+  --color-lavender: #efebf7;
+  --color-lavender-2: #dcd3ee;
+
+  /* Used by the architecture diagram + modal */
+  --color-accent: #c95a1d;
+  --color-accent-2: #2f8f6b;
+  --color-accent-soft: #fbe3d2;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    color-scheme: light;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+  }
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+  ::selection {
+    background: var(--color-orange-soft);
+  }
+}
+
+@layer components {
+  /* Small pill label: "HELLO, I'M —" */
+  .eyebrow-pill {
+    @apply inline-flex items-center gap-2 rounded-full bg-orange-soft px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-[#9a4417];
+  }
+  /* Centered small label: "WHAT I DO" */
+  .eyebrow {
+    @apply text-[0.7rem] font-bold uppercase tracking-[0.24em] text-ink-2;
+  }
+  .card {
+    @apply rounded-3xl border border-line bg-surface;
+  }
+  /* Dark navy pill button */
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full bg-navy px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-navy/15 transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-navy/25 motion-reduce:hover:translate-y-0;
+  }
+  /* White pill button */
+  .btn-light {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full bg-surface px-6 py-3.5 text-sm font-semibold text-ink shadow-md shadow-black/5 ring-1 ring-line transition duration-200 hover:-translate-y-0.5 hover:shadow-lg motion-reduce:hover:translate-y-0;
+  }
+  /* Small white circle with an arrow (card corners) */
+  .arrow-dot {
+    @apply grid size-9 shrink-0 place-items-center rounded-full bg-surface text-ink shadow-sm ring-1 ring-line transition group-hover:bg-navy group-hover:text-white group-hover:ring-navy;
+  }
+  /* Stacked "sheet" panel used by every section after the hero */
+  .panel {
+    @apply relative rounded-t-[2.5rem] bg-panel sm:rounded-t-[3.5rem];
+    box-shadow: 0 -1px 0 var(--color-line);
+  }
+}
+
+/* Pastel tone helpers (cards, icon chips, thumbnails) */
+.tone-peach { --tone: var(--color-peach); --tone-2: var(--color-peach-2); --tone-ink: #b5521c; }
+.tone-blue { --tone: var(--color-blue); --tone-2: var(--color-blue-2); --tone-ink: #2b5fb4; }
+.tone-mint { --tone: var(--color-mint); --tone-2: var(--color-mint-2); --tone-ink: #237152; }
+.tone-lavender { --tone: var(--color-lavender); --tone-2: var(--color-lavender-2); --tone-ink: #5b479a; }
+.bg-tone { background-color: var(--tone); }
+.bg-tone-2 { background-color: var(--tone-2); }
+.text-tone { color: var(--tone-ink); }
+
+/* Floating badges bob gently */
+@media (prefers-reduced-motion: no-preference) {
+  .float-a { animation: floaty 6s ease-in-out infinite; }
+  .float-b { animation: floaty 7s ease-in-out -3s infinite; }
+  .spin-slow { animation: spin 30s linear infinite; }
+  .draw-in path { stroke-dasharray: 400; stroke-dashoffset: 400; animation: draw 1.4s 0.4s ease forwards; }
+}
+@keyframes floaty { 50% { transform: translateY(-8px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* Availability pulse */
+@media (prefers-reduced-motion: no-preference) {
+  .pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: inherit;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+}
+@keyframes ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }
+
+/* ── Architecture diagram (detail modal + card thumbnails) ── */
+.diagram-edge {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+  opacity: 0.8;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .diagram-edge.flow {
+    stroke-dasharray: 5 5;
+    animation: flow 1.2s linear infinite;
+  }
+}
+@keyframes flow { to { stroke-dashoffset: -20; } }

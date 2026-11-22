@@ -7,7 +7,7 @@ export function SectionHead({ id, eyebrow, title, aside }) {
       <p className="eyebrow">{eyebrow}</p>
       <h2
         id={`${id}-heading`}
-        className="relative mx-auto mt-2 inline-block text-3xl font-bold text-ink sm:text-[2.6rem]"
+        className="relative mx-auto mt-2 inline-block text-3xl font-bold text-ink sm:text-[2.4rem]"
       >
         {title}
         {/* Blue underline accent */}
@@ -21,11 +21,11 @@ export function SectionHead({ id, eyebrow, title, aside }) {
   )
 }
 
-/** Section wrapper — no rounded top-panel in dark theme, just a plain dark section */
+/** Section wrapper with generous horizontal margins/padding */
 export default function Section({ id, children, className = '' }) {
   return (
-    <section id={id} aria-labelledby={`${id}-heading`} className={`panel py-12 sm:py-14 ${className}`}>
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">{children}</div>
+    <section id={id} aria-labelledby={`${id}-heading`} className={`panel py-14 sm:py-20 ${className}`}>
+      <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">{children}</div>
     </section>
   )
 }

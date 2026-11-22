@@ -17,7 +17,7 @@ export function Logo({ className = '' }) {
   )
 }
 
-/** Sticky navbar: dark glass, monospace links, blue active indicator. */
+/** Sticky navbar with generous horizontal padding */
 export default function Navbar() {
   const active = useActiveSection(ids) || 'top'
   const [open, setOpen] = useState(false)
@@ -45,7 +45,7 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <nav aria-label="Primary" className="mx-auto flex h-18 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <nav aria-label="Primary" className="mx-auto flex h-18 max-w-6xl items-center justify-between px-6 sm:px-10 lg:px-16">
         <a href="#top" aria-label={`${profile.name}, home`}>
           <Logo />
         </a>
@@ -97,7 +97,7 @@ export default function Navbar() {
             transition={{ duration: 0.25 }}
             className="overflow-hidden border-t border-[#1e2d4a] md:hidden"
           >
-            <ul className="space-y-1 px-4 pb-4 pt-2">
+            <ul className="space-y-1 px-6 pb-4 pt-2">
               {nav.map((n) => (
                 <li key={n.id}>
                   <a

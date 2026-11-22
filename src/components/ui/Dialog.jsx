@@ -4,10 +4,7 @@ import Icon from './Icon.jsx'
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
-/**
- * Accessible modal shell: focus trap, Escape to close, scroll lock, focus restore.
- * Render inside <AnimatePresence> so it animates in and out.
- */
+/** Accessible modal shell — dark blueprint style */
 export default function Dialog({ id, kicker, title, onClose, closeLabel = 'Close', maxWidth = 'max-w-5xl', children }) {
   const panelRef = useRef(null)
   const closeRef = useRef(null)
@@ -46,7 +43,7 @@ export default function Dialog({ id, kicker, title, onClose, closeLabel = 'Close
   return (
     <div className="fixed inset-0 z-[60] flex items-end justify-center sm:items-center sm:p-6">
       <m.div
-        className="absolute inset-0 bg-[#1b1510]/55 backdrop-blur-sm"
+        className="absolute inset-0 bg-[#060c1a]/80 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -62,12 +59,12 @@ export default function Dialog({ id, kicker, title, onClose, closeLabel = 'Close
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 24, scale: 0.98 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className={`relative max-h-[92vh] w-full ${maxWidth} overflow-y-auto overscroll-contain rounded-t-[2rem] bg-panel shadow-2xl sm:rounded-[2rem]`}
+        className={`relative max-h-[92vh] w-full ${maxWidth} overflow-y-auto overscroll-contain rounded-t-[1.5rem] border border-[#1e2d4a] bg-[#0d1428] shadow-2xl shadow-blue-500/10 sm:rounded-[1.5rem]`}
       >
-        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-line bg-panel/95 px-5 py-4 backdrop-blur sm:px-8 sm:py-5">
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-[#1e2d4a] bg-[#0d1428]/95 px-5 py-4 backdrop-blur sm:px-8 sm:py-5">
           <div>
-            {kicker && <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">{kicker}</p>}
-            <h3 id={titleId} className="mt-1 font-serif text-2xl text-ink sm:text-3xl">
+            {kicker && <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-blue-400/60">{kicker}</p>}
+            <h3 id={titleId} className="mt-1 text-2xl font-bold text-ink sm:text-3xl">
               {title}
             </h3>
           </div>
@@ -76,7 +73,7 @@ export default function Dialog({ id, kicker, title, onClose, closeLabel = 'Close
             type="button"
             onClick={onClose}
             aria-label={closeLabel}
-            className="grid size-10 shrink-0 place-items-center rounded-full bg-surface text-ink ring-1 ring-line transition hover:bg-navy hover:text-white"
+            className="grid size-10 shrink-0 place-items-center rounded-md border border-[#1e2d4a] bg-[#111827] text-ink transition hover:border-blue-500/50 hover:bg-blue-600 hover:text-white"
           >
             <Icon name="close" className="size-5" />
           </button>

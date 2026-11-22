@@ -1,7 +1,7 @@
 import { contact } from '../../data/profile.js'
 import Icon from './Icon.jsx'
 
-/** Row of social/contact icons (LinkedIn, email, phone, GitHub when set). */
+/** Row of social/contact icons — dark hover style */
 export default function Socials({ className = '' }) {
   const items = [
     { icon: 'linkedin', label: 'LinkedIn', href: contact.linkedin, external: true },
@@ -18,7 +18,7 @@ export default function Socials({ className = '' }) {
             href={it.href}
             aria-label={it.label + (it.external ? ' (opens in a new tab)' : '')}
             {...(it.external && { target: '_blank', rel: 'noopener noreferrer' })}
-            className="grid size-9 place-items-center rounded-full text-ink transition hover:bg-orange-soft hover:text-[#9a4417]"
+            className="grid size-9 place-items-center rounded-md border border-[#1e2d4a] text-ink-2 transition hover:border-blue-500/40 hover:bg-blue-500/10 hover:text-blue-400"
           >
             <Icon name={it.icon} className="size-[1.35rem]" />
           </a>

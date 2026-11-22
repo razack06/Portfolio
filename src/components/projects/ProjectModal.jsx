@@ -3,7 +3,7 @@ import Icon from '../ui/Icon.jsx'
 import Dialog from '../ui/Dialog.jsx'
 import ArchitectureDiagram from './ArchitectureDiagram.jsx'
 
-/** Project detail: summary, stack, links, architecture, Problem → Built → Result. */
+/** Project detail modal — dark blueprint style */
 export default function ProjectModal({ project, onClose }) {
   const id = `project-${project.id}`
   const { github, demo } = project.links ?? {}
@@ -49,7 +49,7 @@ export default function ProjectModal({ project, onClose }) {
           </h4>
           <ol className="space-y-3">
             {project.breakdown.map((b, i) => (
-              <li key={i} className="grid gap-4 rounded-2xl bg-surface p-5 ring-1 ring-line md:grid-cols-3 md:gap-6">
+              <li key={i} className="grid gap-4 rounded-xl border border-[#1e2d4a] bg-[#111827] p-5 ring-0 md:grid-cols-3 md:gap-6">
                 <Step label="Problem" text={b.problem} />
                 <Step label="What I built" text={b.built} strong />
                 <Step label="Result" text={b.result} accent />
@@ -65,7 +65,7 @@ export default function ProjectModal({ project, onClose }) {
 function Step({ label, text, strong, accent }) {
   return (
     <div>
-      <p className={`text-[0.68rem] font-bold uppercase tracking-[0.16em] ${accent ? 'text-[#a8481a]' : 'text-muted'}`}>{label}</p>
+      <p className={`font-mono text-[0.68rem] font-bold uppercase tracking-[0.16em] ${accent ? 'text-blue-400' : 'text-muted'}`}>{label}</p>
       <p className={`mt-1.5 leading-relaxed ${strong ? 'font-medium text-ink' : 'text-ink-2'}`}>{text}</p>
     </div>
   )

@@ -1,44 +1,49 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
-  --font-script: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-serif: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-script: 'Space Grotesk', ui-sans-serif, sans-serif;
 
-  /* Warm cream palette */
-  --color-bg: #f7f1e9;
-  --color-panel: #fcf9f4;
-  --color-surface: #ffffff;
-  --color-surface-2: #f4eee6;
-  --color-line: #ece3d7;
-  --color-ink: #121826;
-  --color-ink-2: #374151;
-  --color-muted: #5d6676;
-  --color-navy: #111a2e;
-  --color-orange: #d96a2b;
-  --color-orange-soft: #fbe3d2;
+  /* Midnight Blueprint palette */
+  --color-bg: #0a0f1e;
+  --color-panel: #0d1428;
+  --color-surface: #111827;
+  --color-surface-2: #1a2236;
+  --color-line: #1e2d4a;
+  --color-ink: #e2e8f0;
+  --color-ink-2: #94a3b8;
+  --color-muted: #64748b;
+  --color-navy: #3b82f6;
+  --color-orange: #3b82f6;
+  --color-orange-soft: #1e3a5f;
 
-  /* Pastel tones for cards */
-  --color-peach: #fdeee2;
-  --color-peach-2: #fbd9c0;
-  --color-blue: #e6effc;
-  --color-blue-2: #c9dcf7;
-  --color-mint: #e2f1e8;
-  --color-mint-2: #c4e3d1;
-  --color-lavender: #efebf7;
-  --color-lavender-2: #dcd3ee;
+  /* Blueprint card tones */
+  --color-peach: #1a1f3a;
+  --color-peach-2: #232a4a;
+  --color-blue: #0f1e3a;
+  --color-blue-2: #1a3055;
+  --color-mint: #0f2a1e;
+  --color-mint-2: #163828;
+  --color-lavender: #1a1535;
+  --color-lavender-2: #251f4a;
 
-  /* Used by the architecture diagram + modal */
-  --color-accent: #c95a1d;
-  --color-accent-2: #2f8f6b;
-  --color-accent-soft: #fbe3d2;
+  /* Accent colours */
+  --color-accent: #3b82f6;
+  --color-accent-2: #06b6d4;
+  --color-accent-soft: #1e3a5f;
+
+  /* Blueprint glow */
+  --color-glow: #3b82f6;
+  --color-cyan: #06b6d4;
+  --color-blue-bright: #60a5fa;
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    color-scheme: light;
+    color-scheme: dark;
   }
   @media (prefers-reduced-motion: no-preference) {
     html {
@@ -47,70 +52,89 @@
   }
   body {
     @apply bg-bg text-ink font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59,130,246,0.15), transparent),
+      linear-gradient(to bottom, #0a0f1e, #0a0f1e);
   }
   section[id] {
     scroll-margin-top: 5rem;
   }
   :focus-visible {
-    outline: 2px solid var(--color-orange);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
     border-radius: 8px;
   }
   ::selection {
-    background: var(--color-orange-soft);
+    background: rgba(59, 130, 246, 0.3);
+    color: #e2e8f0;
   }
 }
 
 @layer components {
-  /* Small pill label: "HELLO, I'M —" */
+  /* Section eyebrow pill */
   .eyebrow-pill {
-    @apply inline-flex items-center gap-2 rounded-full bg-orange-soft px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-[#9a4417];
+    @apply inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-400;
   }
-  /* Centered small label: "WHAT I DO" */
+  /* Uppercase label */
   .eyebrow {
-    @apply text-[0.7rem] font-bold uppercase tracking-[0.24em] text-ink-2;
+    @apply text-[0.7rem] font-bold uppercase tracking-[0.24em] text-blue-400;
   }
   .card {
-    @apply rounded-3xl border border-line bg-surface;
+    @apply rounded-2xl border border-[#1e2d4a] bg-[#111827];
   }
-  /* Dark navy pill button */
+  /* Primary blue button */
   .btn-dark {
-    @apply inline-flex items-center justify-center gap-2.5 rounded-full bg-navy px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-navy/15 transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-navy/25 motion-reduce:hover:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition duration-200 hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/30 motion-reduce:hover:translate-y-0;
   }
-  /* White pill button */
+  /* Secondary ghost button */
   .btn-light {
-    @apply inline-flex items-center justify-center gap-2.5 rounded-full bg-surface px-6 py-3.5 text-sm font-semibold text-ink shadow-md shadow-black/5 ring-1 ring-line transition duration-200 hover:-translate-y-0.5 hover:shadow-lg motion-reduce:hover:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full border border-[#1e2d4a] bg-[#111827] px-6 py-3.5 text-sm font-semibold text-ink shadow-md transition duration-200 hover:-translate-y-0.5 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 motion-reduce:hover:translate-y-0;
   }
-  /* Small white circle with an arrow (card corners) */
+  /* Arrow circle on cards */
   .arrow-dot {
-    @apply grid size-9 shrink-0 place-items-center rounded-full bg-surface text-ink shadow-sm ring-1 ring-line transition group-hover:bg-navy group-hover:text-white group-hover:ring-navy;
+    @apply grid size-9 shrink-0 place-items-center rounded-full border border-[#1e2d4a] bg-[#111827] text-ink-2 transition group-hover:border-blue-500 group-hover:bg-blue-600 group-hover:text-white;
   }
-  /* Stacked "sheet" panel used by every section after the hero */
+  /* Section panel */
   .panel {
-    @apply relative rounded-t-[2.5rem] bg-panel sm:rounded-t-[3.5rem];
-    box-shadow: 0 -1px 0 var(--color-line);
+    @apply relative bg-panel;
+    border-top: 1px solid #1e2d4a;
   }
 }
 
-/* Pastel tone helpers (cards, icon chips, thumbnails) */
-.tone-peach { --tone: var(--color-peach); --tone-2: var(--color-peach-2); --tone-ink: #b5521c; }
-.tone-blue { --tone: var(--color-blue); --tone-2: var(--color-blue-2); --tone-ink: #2b5fb4; }
-.tone-mint { --tone: var(--color-mint); --tone-2: var(--color-mint-2); --tone-ink: #237152; }
-.tone-lavender { --tone: var(--color-lavender); --tone-2: var(--color-lavender-2); --tone-ink: #5b479a; }
-.bg-tone { background-color: var(--tone); }
+/* Blueprint card tones */
+.tone-peach  { --tone: var(--color-peach);   --tone-2: var(--color-peach-2);   --tone-ink: #60a5fa; }
+.tone-blue   { --tone: var(--color-blue);    --tone-2: var(--color-blue-2);    --tone-ink: #38bdf8; }
+.tone-mint   { --tone: var(--color-mint);    --tone-2: var(--color-mint-2);    --tone-ink: #34d399; }
+.tone-lavender { --tone: var(--color-lavender); --tone-2: var(--color-lavender-2); --tone-ink: #a78bfa; }
+.bg-tone  { background-color: var(--tone); }
 .bg-tone-2 { background-color: var(--tone-2); }
 .text-tone { color: var(--tone-ink); }
 
-/* Floating badges bob gently */
+/* Animated blueprint grid background */
+.blueprint-grid {
+  background-image:
+    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glowing card border on hover */
+.glow-card {
+  position: relative;
+  transition: box-shadow 0.3s ease;
+}
+.glow-card:hover {
+  box-shadow: 0 0 0 1px rgba(59,130,246,0.4), 0 4px 32px rgba(59,130,246,0.12);
+}
+
+/* Badge float */
 @media (prefers-reduced-motion: no-preference) {
   .float-a { animation: floaty 6s ease-in-out infinite; }
   .float-b { animation: floaty 7s ease-in-out -3s infinite; }
   .spin-slow { animation: spin 30s linear infinite; }
-  .draw-in path { stroke-dasharray: 400; stroke-dashoffset: 400; animation: draw 1.4s 0.4s ease forwards; }
 }
 @keyframes floaty { 50% { transform: translateY(-8px); } }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes spin   { to   { transform: rotate(360deg); } }
 
 /* Availability pulse */
 @media (prefers-reduced-motion: no-preference) {
@@ -125,12 +149,16 @@
 }
 @keyframes ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }
 
-/* ── Architecture diagram (detail modal + card thumbnails) ── */
+/* Typing cursor blink */
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.cursor-blink { animation: blink 1s step-end infinite; }
+
+/* Architecture diagram */
 .diagram-edge {
   fill: none;
-  stroke: var(--color-accent);
+  stroke: #3b82f6;
   stroke-width: 1.5;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 @media (prefers-reduced-motion: no-preference) {
   .diagram-edge.flow {
@@ -139,3 +167,17 @@
   }
 }
 @keyframes flow { to { stroke-dashoffset: -20; } }
+
+/* Shimmer on stat numbers */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.text-gradient-blue {
+  background: linear-gradient(90deg, #60a5fa, #38bdf8, #60a5fa);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}

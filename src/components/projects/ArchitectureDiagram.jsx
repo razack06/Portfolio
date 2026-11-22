@@ -1,12 +1,12 @@
 import { useId, useMemo } from 'react'
 import { layoutDiagram, describeDiagram } from './diagramLayout.js'
 
-// Colour of the small dot on each node, by kind
+// Colour of the small dot on each node, by kind — blue-toned for blueprint
 const kindClass = {
-  device: 'fill-accent-2',
-  service: 'fill-accent',
-  db: 'fill-indigo-500',
-  client: 'fill-muted',
+  device: 'fill-cyan-400',
+  service: 'fill-blue-400',
+  db: 'fill-indigo-400',
+  client: 'fill-slate-400',
 }
 const legend = [
   ['device', 'Device / input'],
@@ -32,15 +32,15 @@ function DiagramSvg({ diagram, orientation, title, className }) {
       <desc id={`${uid}-d`}>{desc}</desc>
       <defs>
         <marker id={`${uid}-arrow`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" className="fill-accent" />
+          <path d="M0,0 L10,5 L0,10 z" fill="#3b82f6" />
         </marker>
       </defs>
 
-      {/* Group boxes (e.g. PostgreSQL) */}
+      {/* Group boxes */}
       {L.groups.map((g) => (
         <g key={g.id}>
-          <rect x={g.x} y={g.y} width={g.w} height={g.h} rx="14" className="fill-accent/5 stroke-accent/40" strokeDasharray="4 4" />
-          <text x={g.x + 10} y={g.y + 15} className="fill-accent font-mono" fontSize={h ? 10.5 : 10} fontWeight="500">
+          <rect x={g.x} y={g.y} width={g.w} height={g.h} rx="14" fill="rgba(59,130,246,0.05)" stroke="rgba(59,130,246,0.3)" strokeDasharray="4 4" />
+          <text x={g.x + 10} y={g.y + 15} fill="#60a5fa" fontFamily="JetBrains Mono, monospace" fontSize={h ? 10.5 : 10} fontWeight="500">
             {g.label}
           </text>
         </g>
@@ -64,13 +64,13 @@ function DiagramSvg({ diagram, orientation, title, className }) {
         const subSize = h ? 10 : n.dense ? 9 : 10
         return (
           <g key={n.id}>
-            <rect x={n.x} y={n.y} width={n.w} height={n.h} rx="10" className="fill-surface stroke-line" strokeWidth="1.2" />
-            <circle cx={n.x + 10} cy={n.y + 10} r="3" className={kindClass[n.kind] ?? 'fill-accent'} />
-            <text x={cx} y={n.y + n.h / 2 - 2} textAnchor="middle" className="fill-ink font-sans" fontSize={labelSize} fontWeight="600">
+            <rect x={n.x} y={n.y} width={n.w} height={n.h} rx="10" fill="#111827" stroke="#1e2d4a" strokeWidth="1.2" />
+            <circle cx={n.x + 10} cy={n.y + 10} r="3" className={kindClass[n.kind] ?? 'fill-blue-400'} />
+            <text x={cx} y={n.y + n.h / 2 - 2} textAnchor="middle" fill="#e2e8f0" fontFamily="Space Grotesk, sans-serif" fontSize={labelSize} fontWeight="600">
               {n.label}
             </text>
             {n.sub && (
-              <text x={cx} y={n.y + n.h / 2 + 13} textAnchor="middle" className="fill-muted font-mono" fontSize={subSize}>
+              <text x={cx} y={n.y + n.h / 2 + 13} textAnchor="middle" fill="#64748b" fontFamily="JetBrains Mono, monospace" fontSize={subSize}>
                 {n.sub}
               </text>
             )}
@@ -81,13 +81,13 @@ function DiagramSvg({ diagram, orientation, title, className }) {
   )
 }
 
-/** Responsive architecture diagram: horizontal on ≥md, vertical on phones. */
+/** Responsive architecture diagram */
 export default function ArchitectureDiagram({ diagram, title }) {
   return (
-    <figure className="rounded-2xl border border-line bg-panel p-3 sm:p-5">
+    <figure className="rounded-xl border border-[#1e2d4a] bg-[#0a0f1e] p-3 sm:p-5">
       <DiagramSvg diagram={diagram} orientation="h" title={title} className="hidden md:block" />
       <DiagramSvg diagram={diagram} orientation="v" title={title} className="mx-auto max-w-sm md:hidden" />
-      <figcaption className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-3 text-xs text-muted">
+      <figcaption className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-[#1e2d4a] pt-3 font-mono text-xs text-muted">
         {legend.map(([kind, label]) => (
           <span key={kind} className="inline-flex items-center gap-1.5">
             <svg viewBox="0 0 8 8" className="size-2" aria-hidden="true">
@@ -96,7 +96,7 @@ export default function ArchitectureDiagram({ diagram, title }) {
             {label}
           </span>
         ))}
-        {diagram.caption && <span className="basis-full text-ink-2 sm:basis-auto sm:ml-auto">{diagram.caption}</span>}
+        {diagram.caption && <span className="basis-full text-ink-2 sm:ml-auto sm:basis-auto">{diagram.caption}</span>}
       </figcaption>
     </figure>
   )

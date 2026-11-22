@@ -1,22 +1,27 @@
 import Reveal from './Reveal.jsx'
-import { Squiggle, Sparks } from './Decor.jsx'
 
-/** Centered heading: small uppercase label, serif title, soft squiggle and orange sparks. */
+/** Section heading: eyebrow label + bold title with blue underline accent */
 export function SectionHead({ id, eyebrow, title, aside }) {
   return (
     <Reveal className="relative mb-10 text-center">
       <p className="eyebrow">{eyebrow}</p>
-      <h2 id={`${id}-heading`} className="relative mx-auto mt-2 inline-block font-serif text-3xl text-ink sm:text-[2.6rem]">
+      <h2
+        id={`${id}-heading`}
+        className="relative mx-auto mt-2 inline-block text-3xl font-bold text-ink sm:text-[2.6rem]"
+      >
         {title}
-        <Squiggle className="absolute -bottom-2 left-1/2 h-2.5 w-24 -translate-x-1/2 text-[#9fd0b6]" />
-        <Sparks className="absolute -right-9 -top-3 size-7 text-orange" />
+        {/* Blue underline accent */}
+        <span
+          aria-hidden="true"
+          className="absolute -bottom-2 left-1/2 h-0.5 w-24 -translate-x-1/2 rounded-full bg-gradient-to-r from-transparent via-blue-500 to-transparent"
+        />
       </h2>
       {aside && <div className="mt-4 sm:absolute sm:bottom-1 sm:right-0 sm:mt-0">{aside}</div>}
     </Reveal>
   )
 }
 
-/** Section as a stacked rounded "sheet" (the design's layered panels). */
+/** Section wrapper — no rounded top-panel in dark theme, just a plain dark section */
 export default function Section({ id, children, className = '' }) {
   return (
     <section id={id} aria-labelledby={`${id}-heading`} className={`panel py-12 sm:py-14 ${className}`}>
